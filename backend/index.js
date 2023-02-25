@@ -8,6 +8,14 @@ app.get('/todos', (req, res) => {
   res.send(TODOS);
 })
 
+
+app.delete('/todos/:todoid', (req, res) => {
+    let todo = TODOS.find(element => element.id === req.params.todoid)
+    let index = TODOS.indexOf(todo);
+    TODOS.splice(index,1);
+    res.send(TODOS);
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 })
