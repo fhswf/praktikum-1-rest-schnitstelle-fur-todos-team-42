@@ -8,9 +8,6 @@ app.get('/todos', (req, res) => {
   res.send(TODOS);
 })
 
-app.put('/todos/:todoid', (req, res) => {
-    res.send('Update Completed');
-})
 
 app.delete('/todos/:todoid', (req, res) => {
     let todo = TODOS.find(element => element.id === req.params.todoid)
