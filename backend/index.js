@@ -31,4 +31,10 @@ let TODOS = [
     },
 ];
 
+
+app.post('/todos', function (req, res) {
+  TODOS.push({id:TODOS[TODOS.length-1].id+1,title:req.title,due:req.due,status:req.status})
+});
+  
+
 // Your code here
