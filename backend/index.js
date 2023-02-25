@@ -2,6 +2,15 @@ import express from 'express';
 
 /** Zentrales Objekt für unsere Express-Applikation */
 const app = express();
+const port = 3000
+
+app.get('/todos', (req, res) => {
+  res.send(TODOS);
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+})
 
 /**
  * Liste aller ToDos. 
