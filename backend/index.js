@@ -1,11 +1,17 @@
 import express from 'express';
+import cors from 'cors'
 
 /** Zentrales Objekt für unsere Express-Applikation */
 const app = express();
 const port = 3000
 
+app.use(cors());
+app.use(express.json());
+
 app.get('/todos', (req, res) => {
-  res.send(TODOS);
+  res.json(TODOS);
+  TODOS.push({id:TODOS[TODOS.length-1].id+1,title:req.title,due:req.due,status:req.status})
+  console.log(TODOS)
 })
 
 
@@ -19,6 +25,7 @@ app.delete('/todos/:todoid', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 })
+
 
 /**
  * Liste aller ToDos. 
@@ -38,11 +45,5 @@ let TODOS = [
         "status": 2
     },
 ];
-
-
-app.post('/todos', function (req, res) {
-  TODOS.push({id:TODOS[TODOS.length-1].id+1,title:req.title,due:req.due,status:req.status})
-});
-  
 
 // Your code here
