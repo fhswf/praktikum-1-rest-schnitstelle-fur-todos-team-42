@@ -1,7 +1,43 @@
 import express from 'express';
+import cors from 'cors'
 
 /** Zentrales Objekt für unsere Express-Applikation */
 const app = express();
+const port = 3000
+
+app.use(cors());
+app.use(express.json());
+
+app.get('/todos', (req, res) => {
+  res.json(TODOS);
+  TODOS.push({id:TODOS[TODOS.length-1].id+1,title:req.title,due:req.due,status:req.status})
+  console.log(TODOS)
+})
+
+app.put('/todos/:todoid', (req,res) =>{
+
+  const todo = TODOS.find(element => element.id === req.params.todoid);
+  const index = TODOS.indexOf(todo);
+  if(todo) {
+    todo.title = req.body.title
+    todo.due = req.body.due
+    todo.status = req.body.status
+
+  }
+  res.json(todo)
+}) 
+
+app.delete('/todos/:todoid', (req, res) => {
+    let todo = TODOS.find(element => element.id === req.params.todoid);
+    let index = TODOS.indexOf(todo);
+    TODOS.splice(index,1);
+    res.send(TODOS);
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+})
+
 
 /**
  * Liste aller ToDos. 

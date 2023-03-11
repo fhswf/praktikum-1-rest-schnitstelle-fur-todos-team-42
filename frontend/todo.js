@@ -1,4 +1,3 @@
-
 let todos = [];
 const status = ["offen", "in Bearbeitung", "erledigt"];
 
@@ -111,6 +110,11 @@ function changeStatus(id) {
 }
 
 function loadTodos() {
+    fetch('http://localhost:3000/todos')
+        .then((response)=>{
+            const data=response.text()
+            console.log(JSON.parse(data))
+        })
     let todos = localStorage.getItem("todos");
     if (todos) {
         return JSON.parse(todos);
